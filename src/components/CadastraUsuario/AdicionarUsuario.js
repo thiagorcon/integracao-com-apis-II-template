@@ -7,6 +7,12 @@ import {
   ContainerCadastro
 } from './style'
 
+import {
+  BASE_URL
+} from "../../constants/BASE_URL";
+
+import {AUTH_TOKEN} from "../../constants/AUTH_TOKEN";
+
 function AdicionarUsuario(props) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -18,10 +24,10 @@ function AdicionarUsuario(props) {
     };
     axios
       .post(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users`,
+        `${BASE_URL}`,
         body, {
           headers: {
-            Authorization: "ana-sammi-barbosa"
+            Authorization: AUTH_TOKEN
           }
         }
       )
@@ -36,9 +42,9 @@ function AdicionarUsuario(props) {
       });
   };
 
-  return ( <
-    ContainerCadastro >
-    <h3> Cadastrar novo usuario </h3> 
+  return ( 
+    <ContainerCadastro >
+    <h3> Cadastrar novo usuario </h3>   
     <InputCadastro placeholder = {
       "Nome"
     }
@@ -50,8 +56,8 @@ function AdicionarUsuario(props) {
         setNome(e.target.value);
       }
     }
-    /> <
-    InputCadastro type = "email"
+    />  
+    <InputCadastro type = "email"
     placeholder = {
       "E-mail"
     }
@@ -62,10 +68,12 @@ function AdicionarUsuario(props) {
       (e) => {
         setEmail(e.target.value);
       }
-    }/> 
+    }
+    />   
     <button onClick = {
       postNovoUsuario
-    }> Enviar </button> 
+    } > Enviar 
+    </button>   
     </ContainerCadastro>
   );
 }
