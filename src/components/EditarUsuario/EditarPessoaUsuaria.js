@@ -18,6 +18,10 @@ import {
 import {
   Input
 } from "../../Appstyle";
+import {
+  BASE_URL
+} from "../../constants/BASE_URL";
+import { AUTH_TOKEN } from "../../constants/AUTH_TOKEN";
 
 export const EditarPessoaUsuaria = (props) => {
   const [usuario, setUsuario] = useState({});
@@ -29,9 +33,9 @@ export const EditarPessoaUsuaria = (props) => {
   const getDadosUsuario = () => {
     axios
       .get(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${props.id}`, {
+        `${BASE_URL}/${props.id}`, {
           headers: {
-            Authorization: "ana-sammi-barbosa",
+            Authorization: AUTH_TOKEN,
           },
         }
       )
@@ -56,10 +60,10 @@ export const EditarPessoaUsuaria = (props) => {
     };
     axios
       .put(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuario.id}`,
+        `${BASE_URL}/${usuario.id}`,
         body, {
           headers: {
-            Authorization: "ana-sammi-barbosa"
+            Authorization: AUTH_TOKEN
           }
         }
       )
@@ -72,9 +76,9 @@ export const EditarPessoaUsuaria = (props) => {
   const deletarUsuario = () => {
     axios
       .delete(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuario.id}`, {
+        `${BASE_URL}/${usuario.id}`, {
           headers: {
-            Authorization: "ana-sammi-barbosa"
+            Authorization: AUTH_TOKEN
           }
         }
       )
@@ -94,7 +98,7 @@ export const EditarPessoaUsuaria = (props) => {
 
     {
       editar ? ( 
-        <InputContainer >
+        <InputContainer>
         <Input placeholder = "Nome"
         value = {
           name
@@ -102,7 +106,7 @@ export const EditarPessoaUsuaria = (props) => {
         onChange = {
           (e) => setName(e.target.value)
         }
-        /> 
+        />   
         <Input placeholder = "E-mail"
         value = {
           email
@@ -110,26 +114,26 @@ export const EditarPessoaUsuaria = (props) => {
         onChange = {
           (e) => setEmail(e.target.value)
         }
-        /> 
+        />   
         <SaveButton onClick = {
           editaUsuario
-        }> Salvar </SaveButton> 
+        } > Salvar </SaveButton>   
         <CloseButton onClick = {
           () => setEditar(!editar)
-        } > Fechar </CloseButton> 
-        </InputContainer>
+        } > Fechar </CloseButton>   
+        </InputContainer >
       ) : ( 
         <ButtonContainer>
         <ButtonNome onClick = {
           () => setEditar(!editar)
-        }> {
+        } > {
           usuario.name
-        } </ButtonNome> 
+        } </ButtonNome>   
         <DeleteButton onClick = {
           deletarUsuario
-        }> <AiOutlineDelete /> 
-        </DeleteButton> 
-        </ButtonContainer>
+        } > < AiOutlineDelete />
+        </DeleteButton>   
+        </ButtonContainer >
       )
     } </MainContainer>
   );
