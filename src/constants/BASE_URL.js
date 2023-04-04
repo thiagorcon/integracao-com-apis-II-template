@@ -1,0 +1,1 @@
+// Arquivo para guardar o a constantes de base da url .
