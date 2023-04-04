@@ -3,7 +3,9 @@ import React, {
   useState
 } from "react";
 import axios from "axios";
-import { EditarPessoaUsuaria } from "./components/EditarUsuario/EditarPessoaUsuaria";
+import {
+  EditarPessoaUsuaria
+} from "./components/EditarUsuario/EditarPessoaUsuaria";
 import AdicionarUsuario from "./components/CadastraUsuario/AdicionarUsuario";
 import {
   Header
@@ -14,6 +16,10 @@ import {
   ButtonCadastro,
   BoxCadastro,
 } from "./Appstyle";
+import {
+  BASE_URL
+} from "./constants/BASE_URL";
+import { AUTH_TOKEN } from "./constants/AUTH_TOKEN";
 
 function App() {
   const [usuarios, setUsuarios] = useState([]);
@@ -32,9 +38,9 @@ function App() {
   const getUsuarios = () => {
     axios
       .get(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users", {
+        `${BASE_URL}`, {
           headers: {
-            Authorization: "ana-sammi-barbosa",
+            Authorization: AUTH_TOKEN,
           },
         }
       )
@@ -75,54 +81,64 @@ function App() {
     setPageFlow(1)
   }
 
-  return ( 
-    <div>
-    <Header/>
-    <ContainerPrincipal> {
-      pageFlow === 2 ? ( 
-        <BoxCadastro>
-        <button onClick = {
+  return ( <
+    div >
+    <
+    Header / >
+    <
+    ContainerPrincipal > {
+      pageFlow === 2 ? ( <
+        BoxCadastro >
+        <
+        button onClick = {
           () => setPageFlow(1)
-        }> Voltar </button> <
+        } > Voltar < /button> <
         AdicionarUsuario getUsuarios = {
           getUsuarios
         }
-        />  
-        </BoxCadastro>
-      ) : ( <>
-          <ContainerBarra>
-          <div >
-          <input value = {
+        />    <
+        /BoxCadastro >
+      ) : ( <
+          >
+          <
+          ContainerBarra >
+          <
+          div >
+          <
+          input value = {
             nome
           }
           onChange = {
             onChangeName
           }
           placeholder = "Nome" / >
-          <input value = {
+          <
+          input value = {
             email
           }
           onChange = {
             onChangeEmail
           }
           placeholder = "Email" / >
-          <button type = "submit"
+          <
+          button type = "submit"
           onClick = {
             enviarDados
-          } > Pesquisar </button>  
-          </div> {
-          pageFlow === 3 ? ( 
-            <ButtonCadastro onClick = {
+          } > Pesquisar < /button>    <
+          /div > {
+          pageFlow === 3 ? ( <
+            ButtonCadastro onClick = {
               onClickVoltar
-            }> Voltar </ButtonCadastro>
-          ) : ( 
-            <ButtonCadastro onClick = {
+            } > Voltar < /ButtonCadastro>
+          ) : ( <
+            ButtonCadastro onClick = {
               () => setPageFlow(2)
-            } > Cadastrar </ButtonCadastro>
+            } > Cadastrar < /ButtonCadastro>
           )
         }
 
-        </ContainerBarra> {
+        <
+        /ContainerBarra> {
       usuarios.map((usuario) => {
         return ( <
           EditarPessoaUsuaria key = {
@@ -143,13 +159,14 @@ function App() {
           />
         );
       })
-    } 
-    </>
+    } <
+    />
   )
 }
 
-</ContainerPrincipal>  
-</div>
+<
+/ContainerPrincipal>    <
+/div >
 );
 }
 
