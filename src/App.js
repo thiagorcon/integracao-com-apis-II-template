@@ -3,9 +3,7 @@ import React, {
   useState
 } from "react";
 import axios from "axios";
-import {
-  EditarUsuario
-} from "./components/EditarUsuario/Editar";
+import { EditarPessoaUsuaria } from "./components/EditarUsuario/EditarPessoaUsuaria";
 import AdicionarUsuario from "./components/CadastraUsuario/AdicionarUsuario";
 import {
   Header
@@ -78,82 +76,81 @@ function App() {
   }
 
   return ( 
-  <div>
+    <div>
     <Header/>
     <ContainerPrincipal> {
       pageFlow === 2 ? ( 
         <BoxCadastro>
         <button onClick = {
           () => setPageFlow(1)
-        } > Voltar </button> <
+        }> Voltar </button> <
         AdicionarUsuario getUsuarios = {
           getUsuarios
         }
-        /> 
+        />  
         </BoxCadastro>
-      ) : 
-        (<>
-        <ContainerBarra >
-        <div>
-        <input value = {
-          nome
-        }
-        onChange = {
-          onChangeName
-        }
-        placeholder = "Nome"/>
-        <input value = {
-          email
-        }
-        onChange = {
-          onChangeEmail
-        }
-        placeholder = "Email"/>
-        <button type = "submit"
-        onClick = {
-          enviarDados
-        }>Pesquisar </button> 
-        </div> {
+      ) : ( <>
+          <ContainerBarra>
+          <div >
+          <input value = {
+            nome
+          }
+          onChange = {
+            onChangeName
+          }
+          placeholder = "Nome" / >
+          <input value = {
+            email
+          }
+          onChange = {
+            onChangeEmail
+          }
+          placeholder = "Email" / >
+          <button type = "submit"
+          onClick = {
+            enviarDados
+          } > Pesquisar </button>  
+          </div> {
           pageFlow === 3 ? ( 
             <ButtonCadastro onClick = {
               onClickVoltar
-            } > Voltar </ButtonCadastro>
+            }> Voltar </ButtonCadastro>
           ) : ( 
             <ButtonCadastro onClick = {
               () => setPageFlow(2)
-            }>Cadastrar </ButtonCadastro>
+            } > Cadastrar </ButtonCadastro>
           )
         }
 
         </ContainerBarra> {
-          usuarios.map((usuario) => {
-            return ( <
-              EditarUsuario key = {
-                usuario.id
-              }
-              id = {
-                usuario.id
-              }
-              getUsuarios = {
-                getUsuarios
-              }
-              setPageFlow = {
-                setPageFlow
-              }
-              pageFlow = {
-                pageFlow
-              }
-              />
-            );
-          })
-        } 
-        </>
-      )
-    }
+      usuarios.map((usuario) => {
+        return ( <
+          EditarPessoaUsuaria key = {
+            usuario.id
+          }
+          id = {
+            usuario.id
+          }
+          getUsuarios = {
+            getUsuarios
+          }
+          setPageFlow = {
+            setPageFlow
+          }
+          pageFlow = {
+            pageFlow
+          }
+          />
+        );
+      })
+    } 
+    </>
+  )
+}
 
-    </ContainerPrincipal> 
-    </div>
-  );
+</ContainerPrincipal>  
+</div>
+);
 }
 
 export default App;
