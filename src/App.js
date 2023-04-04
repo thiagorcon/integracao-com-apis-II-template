@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 import axios from "axios";
-import { EditarUsuario } from "./components/EditarUsuario/Editar";
-import AddUsuario from "./components/CadastraUsuario/AddUsuario";
-import { Header } from "./components/Header/Header";
+import {
+  EditarUsuario
+} from "./components/EditarUsuario/Editar";
+import AdicionarUsuario from "./components/CadastraUsuario/AdicionarUsuario";
+import {
+  Header
+} from "./components/Header/Header";
 import {
   ContainerPrincipal,
   ContainerBarra,
@@ -15,7 +22,10 @@ function App() {
   const [pageFlow, setPageFlow] = useState(1);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [pesquisa, setPesquisa] = useState({ nome: "", email: "" });
+  const [pesquisa, setPesquisa] = useState({
+    nome: "",
+    email: ""
+  });
 
   useEffect(() => {
     getUsuarios();
@@ -24,8 +34,7 @@ function App() {
   const getUsuarios = () => {
     axios
       .get(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users",
-        {
+        "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users", {
           headers: {
             Authorization: "ana-sammi-barbosa",
           },
@@ -40,7 +49,7 @@ function App() {
   };
 
   const pesquisaUsuario = (pesquisa) => {
-   
+
   };
 
   const onChangeName = (e) => {
@@ -57,10 +66,10 @@ function App() {
       email,
     };
     setPesquisa(novaPesquisa);
-   
+
     setNome("")
     setEmail("")
-    
+
   };
 
   const onClickVoltar = () => {
@@ -68,57 +77,81 @@ function App() {
     setPageFlow(1)
   }
 
-  return (
-    <div>
-      <Header />
-      <ContainerPrincipal>
-        {pageFlow === 2 ? (
-          <BoxCadastro>
-            <button onClick={() => setPageFlow(1)}>Voltar</button>
-            <AddUsuario getUsuarios={getUsuarios} />
-          </BoxCadastro>
-        ) : (
-          <>
-            <ContainerBarra>
-              <div>
-                <input
-                  value={nome}
-                  onChange={onChangeName}
-                  placeholder="Nome"
-                />
-                <input
-                  value={email}
-                  onChange={onChangeEmail}
-                  placeholder="Email"
-                />
-                <button type="submit" onClick={enviarDados}>
-                  Pesquisar
-                </button>
-              </div>
-              {pageFlow === 3 ? (
-                <ButtonCadastro onClick={onClickVoltar}>Voltar</ButtonCadastro>
-              ) : (
-                <ButtonCadastro onClick={() => setPageFlow(2)}>
-                  Cadastrar
-                </ButtonCadastro>
-              )}
-              
-            </ContainerBarra>
-            {usuarios.map((usuario) => {
-              return (
-                <EditarUsuario
-                  key={usuario.id}
-                  id={usuario.id}
-                  getUsuarios={getUsuarios}
-                  setPageFlow={setPageFlow}
-                  pageFlow={pageFlow}
-                />
-              );
-            })}
-          </>
-        )}
-        
-      </ContainerPrincipal>
+  return ( 
+  <div>
+    <Header/>
+    <ContainerPrincipal> {
+      pageFlow === 2 ? ( 
+        <BoxCadastro>
+        <button onClick = {
+          () => setPageFlow(1)
+        } > Voltar </button> <
+        AdicionarUsuario getUsuarios = {
+          getUsuarios
+        }
+        /> 
+        </BoxCadastro>
+      ) : 
+        (<>
+        <ContainerBarra >
+        <div>
+        <input value = {
+          nome
+        }
+        onChange = {
+          onChangeName
+        }
+        placeholder = "Nome"/>
+        <input value = {
+          email
+        }
+        onChange = {
+          onChangeEmail
+        }
+        placeholder = "Email"/>
+        <button type = "submit"
+        onClick = {
+          enviarDados
+        }>Pesquisar </button> 
+        </div> {
+          pageFlow === 3 ? ( 
+            <ButtonCadastro onClick = {
+              onClickVoltar
+            } > Voltar </ButtonCadastro>
+          ) : ( 
+            <ButtonCadastro onClick = {
+              () => setPageFlow(2)
+            }>Cadastrar </ButtonCadastro>
+          )
+        }
+
+        </ContainerBarra> {
+          usuarios.map((usuario) => {
+            return ( <
+              EditarUsuario key = {
+                usuario.id
+              }
+              id = {
+                usuario.id
+              }
+              getUsuarios = {
+                getUsuarios
+              }
+              setPageFlow = {
+                setPageFlow
+              }
+              pageFlow = {
+                pageFlow
+              }
+              />
+            );
+          })
+        } 
+        </>
+      )
+    }
+
+    </ContainerPrincipal> 
     </div>
   );
 }
