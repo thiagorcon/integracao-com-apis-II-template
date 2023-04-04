@@ -1,3 +1,4 @@
-// Arquivo para guardar o token do usuário . 
+// Arquivo para guardar o token do usuário .
+// Colocar o seu token  
 
-export const AUTH_TOKEN = "fayra-labenu"
+export const AUTH_TOKEN = " "
