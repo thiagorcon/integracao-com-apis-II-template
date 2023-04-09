@@ -3,6 +3,8 @@ import axios from "axios";
 import { ButtonNome, DeleteButton, ButtonContainer, MainContainer, InputContainer, SaveButton, CloseButton } from './style'
 import {AiOutlineDelete} from 'react-icons/ai'
 import { Input } from "../../Appstyle";
+import { BASE_URL } from "../../constants/BASE_URL";
+import { AUTH_TOKEN } from "../../constants/AUTH_TOKEN";
 
 export const EditarUsuario = (props) => {
   const [usuario, setUsuario] = useState({});
@@ -14,10 +16,10 @@ export const EditarUsuario = (props) => {
   const getDadosUsuario = () => {
     axios
       .get(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${props.id}`,
+        `${BASE_URL}/${props.id}`,
         {
           headers: {
-            Authorization: "ana-sammi-barbosa",
+            Authorization: AUTH_TOKEN,
           },
         }
       )
@@ -42,11 +44,11 @@ export const EditarUsuario = (props) => {
       };
       axios
         .put(
-          `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuario.id}`,
+          `${BASE_URL}/${usuario.id}`,
           body,
           {
             headers: {
-              Authorization: "ana-sammi-barbosa"
+              Authorization: AUTH_TOKEN
             }
           }
         )
@@ -59,10 +61,10 @@ export const EditarUsuario = (props) => {
   const deletarUsuario = () => {
     axios
       .delete(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuario.id}`,
+        `${BASE_URL}/${usuario.id}`,
         {
           headers: {
-            Authorization: "ana-sammi-barbosa"
+            Authorization: AUTH_TOKEN
           }
         }
       )

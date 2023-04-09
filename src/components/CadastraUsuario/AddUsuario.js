@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { InputCadastro, ContainerCadastro } from './style'
+import { BASE_URL } from "../../constants/BASE_URL";
+import { AUTH_TOKEN } from "../../constants/AUTH_TOKEN";
 
 function AddUsuario(props) {
   const [nome, setNome] = useState("");
@@ -13,11 +15,11 @@ function AddUsuario(props) {
     };
     axios
       .post(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users`,
+        BASE_URL,
         body,
         {
           headers: {
-            Authorization: "ana-sammi-barbosa"
+            Authorization: AUTH_TOKEN
           }
         }
       )

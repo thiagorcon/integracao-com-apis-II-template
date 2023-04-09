@@ -9,6 +9,8 @@ import {
   ButtonCadastro,
   BoxCadastro,
 } from "./Appstyle";
+import { BASE_URL } from "./constants/BASE_URL";
+import { AUTH_TOKEN } from "./constants/AUTH_TOKEN";
 
 function App() {
   const [usuarios, setUsuarios] = useState([]);
@@ -24,10 +26,10 @@ function App() {
   const getUsuarios = () => {
     axios
       .get(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users",
+        BASE_URL,
         {
           headers: {
-            Authorization: "ana-sammi-barbosa",
+            Authorization: AUTH_TOKEN,
           },
         }
       )
