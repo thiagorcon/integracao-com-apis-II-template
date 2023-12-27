@@ -41,8 +41,22 @@ function App() {
       });
   };
 
-  const pesquisaUsuario = (pesquisa) => {
-   
+  const pesquisaUsuario = async() => {
+try {
+  const response = await axios.get(`${BASE_URL}/search?name=${nome}&email=${email}`,{
+    headers: {
+      Authorization: AUTH_TOKEN,
+    }} )
+  
+  if (nome ==="" && email ===""){
+    getUsuarios()
+  } else {
+  console.log(response.data);
+  setUsuarios(response.data)}
+} catch (error) {
+  console.log(error);
+}
+   ;
   };
 
   const onChangeName = (e) => {
@@ -93,7 +107,7 @@ function App() {
                   onChange={onChangeEmail}
                   placeholder="Email"
                 />
-                <button type="submit" onClick={enviarDados}>
+                <button type="submit" onClick={pesquisaUsuario}>
                   Pesquisar
                 </button>
               </div>
